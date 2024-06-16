@@ -30,4 +30,8 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+  .glassmorphism {
+    background-color: rgba(255, 255, 255, .15);
+    @apply backdrop-blur-[1px]
+  }
 }
