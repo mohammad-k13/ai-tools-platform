@@ -2,14 +2,16 @@ import Header from "@/components/Header";
 import { Button } from "@nextui-org/button";
 import { clsx } from "clsx";
 import { island_moments } from "./fonts";
+import Link from "next/link";
 
 export default function Home() {
 	return (
 		<section className="h-screen bg-[url('/images/Home-bg.png')] bg-right-bottom md:bg-right-bottom flex flex-col">
-			<Header />
+			{/* <Header /> */}
 			<main
-				className="text-black flex-1 w-full flex items-center justify-center flex-col gap-5 "
-				style={{ height: "calc(100% - 3.5rem)" }}>
+				className="w-full h-full flex items-center justify-center flex-col gap-5 text-white"
+				// style={{ height: "calc(100% - 3.5rem)" }}
+				>
 				<h1
 					className={clsx(
 						"w-[90%] md:w-[850px] lg:[1200px] text-7xl lg:text-9xl md:text-5xl capitalize text-center",
@@ -23,9 +25,10 @@ export default function Home() {
 					voluptatum quia omnis eligendi maxime necessitatibus sequi facilis ratione? Deleniti
 					mollitia deserunt similique accusantium nisi repellendus iste laudantium.
 				</p>
-				<Button size="md" className="bg-white text-black py-2 px-3 rounded-md">
-					Create Free Account
-				</Button>
+				<button className="bg-white/90 text-black/75 py-2 px-3 rounded-md hover:px-5 transition-all">
+					<Link href={'/signUp'}>Create Free Account</Link>
+				</button>
+				
 			</main>
 		</section>
 	);

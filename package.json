@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+   "dev": "npm-run-all --parallel dev:frontend dev:backend",
+    "dev:frontend": "next dev",
+    "dev:backend": "convex dev",
+    "predev": "convex dev --until-success && convex dashboard",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "tsc && next lint"
   },
   "dependencies": {
     "@nextui-org/button": "^2.0.34",
@@ -14,8 +17,13 @@
     "@nextui-org/system": "^2.2.2",
     "@nextui-org/theme": "^2.2.6",
     "clsx": "^2.1.1",
+    "convex": "^1.12.1",
+    "convex-helpers": "^0.1.41",
     "framer-motion": "^11.2.10",
+    "jose": "^5.4.0",
     "next": "14.2.4",
+    "next-auth": "^5.0.0-beta.19",
+    "npm-run-all": "^4.1.5",
     "react": "^18",
     "react-dom": "^18",
     "tailwind-merge": "^2.3.0"
