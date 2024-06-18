@@ -8,7 +8,7 @@ const SignIn = () => {
         <h2>Create a Account</h2>
         <Input variant='faded' placeholder='username' className='text-black'/>
         <button type='submit'>Submit</button>
-      </form>
+      
     </main>
   )
 }
