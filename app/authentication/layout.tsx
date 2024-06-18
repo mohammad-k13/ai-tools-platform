@@ -5,7 +5,6 @@ export default async function AuthLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
-	signup: React.ReactNode;
 }>) {
 	return (
 		<section
