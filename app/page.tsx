@@ -14,7 +14,7 @@ export default function Home() {
 				>
 				<h1
 					className={clsx(
-						"w-[90%] md:w-[850px] lg:[1200px] text-7xl lg:text-9xl md:text-5xl capitalize text-center",
+						"w-[90%] font-semibold md:w-[850px] lg:[1200px] text-7xl lg:text-9xl md:text-5xl capitalize text-center",
 						island_moments.className,
 					)}>
 					do magic with Ai platform
