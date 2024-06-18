@@ -26,7 +26,7 @@ export default function Home() {
 					mollitia deserunt similique accusantium nisi repellendus iste laudantium.
 				</p>
 				<button className="bg-white/90 text-black/75 py-2 px-3 rounded-md hover:px-5 transition-all">
-					<Link href={'/signUp'}>Create Free Account</Link>
+					<Link href={'/authentication?auth-type=login'}>Create Free Account</Link>
 				</button>
 				
 			</main>
