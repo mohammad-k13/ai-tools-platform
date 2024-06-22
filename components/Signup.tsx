@@ -1,5 +1,5 @@
 "use client";
-import { island_moments } from "@/app/fonts";
+import { island_moments } from "@/app/styles/fonts";
 import { SignupAction } from "@/libs/ServerActions";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";

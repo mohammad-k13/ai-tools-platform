@@ -1,7 +1,7 @@
 import Header from "@/components/Header";
 import { Button } from "@nextui-org/button";
 import { clsx } from "clsx";
-import { island_moments } from "./fonts";
+import { island_moments } from "./styles/fonts";
 import Link from "next/link";
 
 export default function Home() {

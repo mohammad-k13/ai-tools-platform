@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { NextUIProvider } from "@nextui-org/react";
 
-import { roboto_font } from "./fonts";
+import { roboto_font } from "./styles/fonts";
 import "./globals.css";
 import clsx from "clsx";
-import ConvexClientProvider from "./ConvexProviderWithAuth";
+import ConvexClientProvider from "./providers/ConvexProviderWithAuth";
 import { auth } from "@/auth";
 
 export const metadata: Metadata = {

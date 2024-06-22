@@ -20,7 +20,7 @@ const Login = ({ toggelAuthType }: { toggelAuthType: () => void }) => {
 
 	return (
 		<motion.div
-			className="w-fit h-full flex flex-col absolute right-[20px]"
+			className="w-[40%] h-full flex items-center justify-center flex-col absolute right-[40px]"
 			initial={{ x: 100, opacity: 0 }}
 			animate={{ x: 0, opacity: 1 }}
 			exit={{ x: -100, opacity: 0 }}>

@@ -2,6 +2,8 @@
 
 import { z } from "zod";
 import { LoginSchema, SignupSchema } from "./formSchema";
+import { createUser } from "@/convex/authAdapter";
+import { signIn } from "@/auth";
 
 export const SignupAction = async (prevState: any, formData: FormData) => {
 	const userData: z.infer<typeof SignupSchema> = {
@@ -10,10 +12,8 @@ export const SignupAction = async (prevState: any, formData: FormData) => {
 		password: formData.get("password") as string,
 	};
 
-      const result = SignupSchema.safeParse(userData);
-      if(!result.success) {
-            return result.error.issues;
-      }
+      return [];
+
 };
 
 export const LoginAction = async (prevState: any, formData: FormData) => {
@@ -22,8 +22,6 @@ export const LoginAction = async (prevState: any, formData: FormData) => {
 		password: formData.get("password") as string,
 	};
 
-      const result = SignupSchema.safeParse(userData);
-      if(!result.success) {
-            return result.error.issues;
-      }
+      await signIn("github", {redirectTo: "/", })
+      return [];
 }
