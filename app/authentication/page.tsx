@@ -10,6 +10,8 @@ export type AuthType = "signup" | "login";
 
 const AuthCallback = () => {
 	const [scope, animate] = useAnimate();
+	const [isDesktop, setIsDesktop] = useState(window.innerWidth > 786);
+
 	const sreachParams = useSearchParams();
 	const [authType, setAuthType] = useState<AuthType>(sreachParams.get("auth-type") as AuthType);
 
@@ -26,10 +28,10 @@ const AuthCallback = () => {
 	return (
 		<div
 			className={clsx("w-full h-full bg-none relative text-black", {
-				"pl-5": authType === "signup",
-				"pr-5": authType === "login",
+				"": authType === "signup",
+				"": authType === "login",
 			})}>
-			<AnimatePresence mode="wait">
+			<AnimatePresence mode="popLayout">
 				{authType === "login" ? (
 					<Login toggelAuthType={toggleState} />
 				) : (
@@ -38,7 +40,7 @@ const AuthCallback = () => {
 			</AnimatePresence>
 			<motion.div
 				ref={scope}
-				className="absolute w-[45%] h-[95%] top-1/2 left-[10px] bg-[url('/images/auth-bg.png')] bg-center rounded-xl z-50"
+				className="max-md:hidden absolute w-[45%] h-[95%] top-1/2 left-[10px] bg-[url('/images/auth-bg.png')] bg-center rounded-xl z-50"
 				initial={{ opacity: 0, y: "-50%" }}
 				animate={{ opacity: 1, y: "-50%" }}
 			/>

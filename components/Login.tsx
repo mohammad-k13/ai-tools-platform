@@ -7,20 +7,18 @@ import Link from "next/link";
 import { Input } from "@nextui-org/input";
 import { useFormState } from "react-dom";
 import { useEffect } from "react";
+import { FormActionStateType } from "@/types";
+import InputGroup from "./InputGroup";
+import FormButton from "./FormButton";
+
+const initialState: FormActionStateType = { errors: {} };
 
 const Login = ({ toggelAuthType }: { toggelAuthType: () => void }) => {
-	const [state, formAction] = useFormState(LoginAction, []);
-
-	useEffect(() => {
-		console.table(state);
-		return () => {
-			console.table(state);
-		};
-	}, [state]);
+	const [state, formAction] = useFormState(LoginAction, initialState);
 
 	return (
 		<motion.div
-			className="w-[40%] h-full flex items-center justify-center flex-col absolute right-[40px]"
+			className="w-[90%] mx-auto md:w-[40%] h-full flex items-center justify-center flex-col absolute max-md:right-1/2 max-md:!translate-x-1/2 md:left[40px]"
 			initial={{ x: 100, opacity: 0 }}
 			animate={{ x: 0, opacity: 1 }}
 			exit={{ x: -100, opacity: 0 }}>
@@ -33,18 +31,29 @@ const Login = ({ toggelAuthType }: { toggelAuthType: () => void }) => {
 
 			<main className="w-full">
 				<form action={formAction} className="w-full flex flex-col gap-5">
-					<Input isRequired type="email" label="Email" size="sm" className="w-full" name="email" />
-					<Input
-						isRequired
-						type="password"
-						label="Password"
-						size="sm"
-						className="w-full"
-						name="passowrd"
+					<InputGroup
+						state={state}
+						inputConfig={{
+							className: "w-full mb-1",
+							label: "Email",
+							type: "email",
+							name: "email",
+							size: "sm",
+						}}
+						animationDelay={0}
 					/>
-					<Button size="md" color="primary" type="submit">
-						Log In
-					</Button>
+					<InputGroup
+						state={state}
+						inputConfig={{
+							className: "w-full mb-1",
+							label: "Password",
+							type: "password",
+							name: "password",
+							size: "sm",
+						}}
+						animationDelay={state.errors.email ? 0.2 : 0}
+					/>
+					<FormButton value="Login" />
 				</form>
 			</main>
 

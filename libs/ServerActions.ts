@@ -2,10 +2,10 @@
 
 import { z } from "zod";
 import { LoginSchema, SignupSchema } from "./formSchema";
-import { signupStateType } from "@/components/Signup";
+import { FormActionStateType } from "@/types";
 
 export const SignupAction = async (prevState: any, formData: FormData) => {
-	let state: signupStateType = { errors: {} };
+	let errors: FormActionStateType = { errors: {} };
 
 	const userData: z.infer<typeof SignupSchema> = {
 		username: formData.get("username") as string,
@@ -15,18 +15,27 @@ export const SignupAction = async (prevState: any, formData: FormData) => {
 	const validationResult = SignupSchema.safeParse(userData);
 
 	if (!validationResult.success) {
-		state = { errors: { ...validationResult.error.flatten().fieldErrors } };
-		return state;
+		errors = { errors: { ...validationResult.error.flatten().fieldErrors } };
+		return errors;
 	}
 
-	return state;
+	return errors;
 };
 
 export const LoginAction = async (prevState: any, formData: FormData) => {
+	let errors: FormActionStateType = { errors: {} };
+
 	const userData: z.infer<typeof LoginSchema> = {
 		email: formData.get("email") as string,
 		password: formData.get("password") as string,
 	};
 
-	return [];
+	const validationResult = LoginSchema.safeParse(userData);
+
+	if (!validationResult.success) {
+		errors = { errors: { ...validationResult.error.flatten().fieldErrors } };
+		return errors;
+	}
+
+	return errors;
 };
