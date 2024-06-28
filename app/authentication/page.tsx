@@ -10,8 +10,6 @@ export type AuthType = "signup" | "login";
 
 const AuthCallback = () => {
 	const [scope, animate] = useAnimate();
-	const [isDesktop, setIsDesktop] = useState(window.innerWidth > 786);
-
 	const sreachParams = useSearchParams();
 	const [authType, setAuthType] = useState<AuthType>(sreachParams.get("auth-type") as AuthType);
 

@@ -6,7 +6,7 @@ const FormButton = ({value}: {value: string}) => {
 	const { pending } = useFormStatus();
 
 	return (
-		<Button size="md" color={"primary"} type="submit" disabled={pending} disableAnimation={pending}>
+		<Button size="md" color={"primary"} type="submit" disabled={pending} disableAnimation={pending} onClick={() => navigator.vibrate(200)}>
 			{pending ? (
 				<div className="flex items-center gap-3 ">
 					<Spinner size="sm" color="default" />

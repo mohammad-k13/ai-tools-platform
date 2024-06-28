@@ -1,24 +1,32 @@
-"use client";
-
 import { LoginAction } from "@/libs/ServerActions";
 import { Button } from "@nextui-org/button";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Input } from "@nextui-org/input";
 import { useFormState } from "react-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FormActionStateType } from "@/types";
 import InputGroup from "./InputGroup";
 import FormButton from "./FormButton";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
 
-const initialState: FormActionStateType = { errors: {} };
+const loginInitialState: FormActionStateType = { info: {
+	email: "",
+	password:""
+}, isInfoError: false };
 
 const Login = ({ toggelAuthType }: { toggelAuthType: () => void }) => {
-	const [state, formAction] = useFormState(LoginAction, initialState);
+	const [actionState, setActionState] = useState<FormActionStateType>(loginInitialState);
+	
+	const FormAction = async (formData: FormData) => {
+		const result = await LoginAction(null, formData);
+		setActionState(result);
+	}
 
 	return (
 		<motion.div
-			className="w-[90%] mx-auto md:w-[40%] h-full flex items-center justify-center flex-col absolute max-md:right-1/2 max-md:!translate-x-1/2 md:left[40px]"
+			className="w-[90%] mx-auto md:w-[40%] h-full flex items-center justify-center flex-col absolute max-md:right-1/2 max-md:!translate-x-1/2 md:right-[40px]"
 			initial={{ x: 100, opacity: 0 }}
 			animate={{ x: 0, opacity: 1 }}
 			exit={{ x: -100, opacity: 0 }}>
@@ -30,9 +38,9 @@ const Login = ({ toggelAuthType }: { toggelAuthType: () => void }) => {
 			</header>
 
 			<main className="w-full">
-				<form action={formAction} className="w-full flex flex-col gap-5">
+				<form action={FormAction} className="w-full flex flex-col gap-5">
 					<InputGroup
-						state={state}
+						state={actionState}
 						inputConfig={{
 							className: "w-full mb-1",
 							label: "Email",
@@ -43,7 +51,7 @@ const Login = ({ toggelAuthType }: { toggelAuthType: () => void }) => {
 						animationDelay={0}
 					/>
 					<InputGroup
-						state={state}
+						state={actionState}
 						inputConfig={{
 							className: "w-full mb-1",
 							label: "Password",
@@ -51,7 +59,7 @@ const Login = ({ toggelAuthType }: { toggelAuthType: () => void }) => {
 							name: "password",
 							size: "sm",
 						}}
-						animationDelay={state.errors.email ? 0.2 : 0}
+						animationDelay={actionState.isInfoError && actionState.info.email ? 0.2 : 0}
 					/>
 					<FormButton value="Login" />
 				</form>
