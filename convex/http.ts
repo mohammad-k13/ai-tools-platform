@@ -1,44 +1,31 @@
 import { httpRouter } from "convex/server";
-import { httpAction } from "./_generated/server";
+import { createUser, getAllUsers, getSingleUser } from "./userHttp";
+import { CreateSession } from "./sessionHttp";
 
 const http = httpRouter();
 
 http.route({
-	path: "/.well-known/openid-configuration",
+	path: "/get-users",
 	method: "GET",
-	handler: httpAction(async () => {
-		return new Response(
-			JSON.stringify({
-				issuer: process.env.CONVEX_SITE_URL,
-				jwks_uri: process.env.CONVEX_SITE_URL + "/.well-known/jwks.json",
-				authorization_endpoint: process.env.CONVEX_SITE_URL + "/oauth/authorize",
-			}),
-			{
-				status: 200,
-				headers: {
-					"Content-Type": "application/json",
-					"Cache-Control": "public, max-age=15, stale-while-revalidate=15, stale-if-error=86400",
-				},
-			},
-		);
-	}),
+	handler: getAllUsers,
 });
 
 http.route({
-	path: "/.well-known/jwks.json",
-	method: "GET",
-	handler: httpAction(async () => {
-		if (process.env.JWKS === undefined) {
-			throw new Error("Missing JWKS Convex environment variable");
-		}
-		return new Response(process.env.JWKS, {
-			status: 200,
-			headers: {
-				"Content-Type": "application/json",
-				"Cache-Control": "public, max-age=15, stale-while-revalidate=15, stale-if-error=86400",
-			},
-		});
-	}),
+      path: "/get-singleUser",
+      method: "POST",
+      handler: getSingleUser
+})
+
+http.route({
+	path: "/create-user",
+	method: "POST",
+	handler: createUser,
+});
+
+http.route({
+	path: "/create-session",
+	method: "POST",
+	handler: CreateSession,
 });
 
 export default http;

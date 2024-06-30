@@ -4,8 +4,7 @@ import { NextUIProvider } from "@nextui-org/react";
 import { roboto_font } from "./fonts";
 import "./globals.css";
 import clsx from "clsx";
-import ConvexClientProvider from "./ConvexProviderWithAuth";
-import { auth } from "@/auth";
+import ConvexClientProvider from "./ConvexClientProvider";
 
 export const metadata: Metadata = {
 	title: "AI Tools Platform",
@@ -17,12 +16,11 @@ export default async function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	const session = await auth();
 	return (
 		<html lang="en">
 			<body className={clsx("h-screen", roboto_font.className)}>
 				<NextUIProvider>
-					<ConvexClientProvider session={session}>{children}</ConvexClientProvider>
+					<ConvexClientProvider>{children}</ConvexClientProvider>
 				</NextUIProvider>
 			</body>
 		</html>
