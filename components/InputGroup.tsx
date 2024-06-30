@@ -24,9 +24,11 @@ const InputGroup = ({
 		<section className="flex flex-col">
 			<Input isRequired type={type} label={label} size={size} className={className} name={name} />
 			<AnimatePresence mode="sync">
-				{state.isInfoError && state.info[name] &&
-					// form validation logic in singup Aciton return string[] for each input
-					state.info[name].map((text, index) => (
+				{state &&
+					state.isInfoError &&
+					state.info &&
+					state.info[name] &&
+					state.info[name]?.map((text, index) => (
 						<motion.small
 							key={`${index}${text}`}
 							initial={{ x: -20, height: 0, opacity: 0 }}
@@ -45,5 +47,4 @@ const InputGroup = ({
 		</section>
 	);
 };
-
 export default InputGroup;
