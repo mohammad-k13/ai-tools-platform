@@ -1,4 +1,7 @@
+import { GetCookie } from "@/libs";
 import clsx from "clsx";
+import { getSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 import React from "react";
 
 export default async function AuthLayout({
@@ -7,6 +10,11 @@ export default async function AuthLayout({
 	children: React.ReactNode;
 	signup: React.ReactNode;
 }>) {
+
+	const session = GetCookie("session_id");
+	if(session) {
+		redirect("/dashboard")
+	}
 	return (
 		<section
 			className={clsx(

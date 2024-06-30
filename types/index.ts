@@ -17,3 +17,7 @@ type ActionStateNotErrorType = {
 };
 
 export type FormActionStateType = ActionStateErrorType | ActionStateNotErrorType ;
+
+
+
+export type cookieNamesType = "session_id"

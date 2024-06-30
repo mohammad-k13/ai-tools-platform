@@ -41,15 +41,13 @@ export const GetUserById = query({
 export const GetSingleUser = query({
 	args: {
 		email: v.string(),
-		password: v.string(),
 	},
 	handler: async (ctx, args) => {
-		const { email, password } = args;
+		const { email } = args;
 
 		return await ctx.db
 			.query("users")
 			.filter((q) => q.eq(q.field("email"), email))
-			.filter((q) => q.eq(q.field("password"), password))
 			.collect();
 	},
 });

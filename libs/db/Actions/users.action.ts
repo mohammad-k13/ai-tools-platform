@@ -20,18 +20,19 @@ export const CreateUserAction = async (State: FormActionStateType["info"]) => {
 	}
 };
 
-export const HasUserCreatedAccout = async (userInfo: { email: string; password: string }) => {
+export const GetSingleUserAction = async (email: string) => {
 	const reposne = await fetch(process.env.DEPLOYMENT_NAME + "/get-singleUser", {
 		method: "POST",
 		headers: {
 			"content-type": "application/json",
 		},
-		body: JSON.stringify(userInfo),
+		body: JSON.stringify({ email }),
 	});
 
-	//user is array if is empty user doesn't exist;
+	//if user is exist server send userInfo in an array
 	const user = await reposne.json();
-	return user.length !== 0 ? user : null;
+	// return user;
+	return user.length !== 0 ? user : [];
 };
 
 export const GetUserById = async () => {};

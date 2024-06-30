@@ -13,11 +13,10 @@ export const getAllUsers = httpAction(async (ctx, req) => {
 });
 
 export const getSingleUser = httpAction(async (ctx, req) => {
-	const { email, password } = await req.json();
+	const { email } = await req.json();
 
 	const user = await ctx.runQuery(api.users.GetSingleUser, {
 		email,
-		password,
 	});
 
 	return new Response(JSON.stringify(user), {

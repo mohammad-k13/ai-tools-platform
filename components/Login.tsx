@@ -1,4 +1,4 @@
-import { LoginAction } from "@/libs/ServerActions";
+import { LoginAction } from "@/libs/LoginAction";
 import { Button } from "@nextui-org/button";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -11,25 +11,23 @@ import FormButton from "./FormButton";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 
-const loginInitialState: FormActionStateType = { info: {
-	email: "",
-	password:""
-}, isInfoError: false };
+const loginInitialState: FormActionStateType = {
+	info: {
+		email: "",
+		password: "",
+	},
+	isInfoError: false,
+};
 
 const Login = ({ toggelAuthType }: { toggelAuthType: () => void }) => {
-	const [actionState, setActionState] = useState<FormActionStateType>(loginInitialState);
-	
-	const FormAction = async (formData: FormData) => {
-		const result = await LoginAction(null, formData);
-		setActionState(result);
-	}
+	const [actionState, formAction] = useFormState(LoginAction, loginInitialState);
 
 	return (
 		<motion.div
-			className="w-[90%] mx-auto md:w-[40%] h-full flex items-center justify-center flex-col absolute max-md:right-1/2 max-md:!translate-x-1/2 md:right-[40px]"
-			initial={{ x: 100, opacity: 0 }}
-			animate={{ x: 0, opacity: 1 }}
-			exit={{ x: -100, opacity: 0 }}>
+			className="w-[90%] mx-auto md:w-[40%] h-full flex items-center origin-left  justify-center flex-col absolute max-md:right-1/2 max-md:!translate-x-1/2 md:right-[40px]"
+			initial={{ x: 100, scale: 0, opacity: 0 }}
+			animate={{ x: 0, scale: 1, opacity: 1 }}
+			exit={{ x: -100, scale: 0, opacity: 0 }}>
 			<header className="w-full flex flex-col gap-3 mb-7">
 				<h2 className="text-4xl font-bold text-center w-full">Log In!</h2>
 				<small className="text-sm text-muted text-gray-400 capitalize w-full text-center">
@@ -38,7 +36,7 @@ const Login = ({ toggelAuthType }: { toggelAuthType: () => void }) => {
 			</header>
 
 			<main className="w-full">
-				<form action={FormAction} className="w-full flex flex-col gap-5">
+				<form action={formAction} className="w-full flex flex-col gap-5">
 					<InputGroup
 						state={actionState}
 						inputConfig={{
