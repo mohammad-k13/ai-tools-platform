@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { NextUIProvider } from "@nextui-org/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react"
 
 import { roboto_font } from "./fonts";
 import "./globals.css";
@@ -21,6 +22,7 @@ export default async function RootLayout({
 		<html lang="en">
 			<body className={clsx("h-screen", roboto_font.className)}>
 				<SpeedInsights />
+				<Analytics />
 				<NextUIProvider>
 					<ConvexClientProvider>{children}</ConvexClientProvider>
 				</NextUIProvider>
