@@ -19,6 +19,7 @@
     "@nextui-org/spinner": "^2.0.30",
     "@nextui-org/system": "^2.2.2",
     "@nextui-org/theme": "^2.2.6",
+    "@vercel/speed-insights": "^1.0.12",
     "bcrypt": "^5.1.1",
     "clsx": "^2.1.1",
     "convex": "^1.12.1",

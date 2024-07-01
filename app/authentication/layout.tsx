@@ -20,5 +20,5 @@ export default async function AuthLayout({
 				{children}
 			</main>
 		</section>
-	);
+);
 }
